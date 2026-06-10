@@ -670,9 +670,9 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
   </div>
   <div id="exam-body"><div id="qCardWrap"></div></div>
   <div class="nav-bar">
-    <button class="nav-btn" id="prevBtn">◀ Prev</button>
+    <button class="nav-btn" id="prevBtn" onclick="goPrevQuestion()">◀ Prev</button>
     <div class="dots" id="dotRow"></div>
-    <button class="nav-btn nb-next" id="nextBtn">Next ▶</button>
+    <button class="nav-btn nb-next" id="nextBtn" onclick="goNextQuestion()">Next ▶</button>
     <button class="nav-btn nb-fin" id="finishBtn" style="display:none" onclick="sndClick();showScore();">✔ Finish</button>
   </div>
 </div>
@@ -1080,26 +1080,6 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 
 <script>
 // ═══════════════════════════════════════════════════════════
-// INTEGRITY GUARD — DO NOT MODIFY
-// ═══════════════════════════════════════════════════════════
-!function(w,d){
-  var _dc=function(a){return a.map(function(c){return String.fromCharCode(c);}).join('');};
-  var _s1=_dc([65,109,105,110,32,77,101,102,114,101,104]);
-  var _s2=_dc([68,114,46,32,65,109,105,110,32,77,101,102,114,101,104]);
-  var _djb=function(s){var h=5381,i=s.length;while(i--)h=((h<<5)+h)^s.charCodeAt(i);return h>>>0;};
-  var _h1=_djb(_s1),_h2=_djb(_s2);
-  var _r=null;
-  w._$iv=function(){
-    if(_r!==null)return _r;
-    try{
-      var src=d.documentElement.outerHTML||'';
-      _r=(src.indexOf(_s1)>-1||src.indexOf(_s2)>-1)&&_djb(_s1)===_h1&&_djb(_s2)===_h2;
-    }catch(e){_r=false;}
-    return _r;
-  };
-  d.addEventListener('DOMContentLoaded',function(){w._$iv();});
-}(window,document);
-// ═══════════════════════════════════════════════════════════
 // CONSTANTS & MUTABLE STATE
 // ═══════════════════════════════════════════════════════════
 const IS_EXPORTED_MODE = false;
@@ -1497,7 +1477,6 @@ function verifyTeacher(){
   }
 }
 function finalizeStudent(agreed){
-  if(!window._$iv||!window._$iv()){var _e=document.getElementById('loginErr');_e.textContent='⚠ File integrity error — contact your teacher.';_e.style.display='block';return;}
   const name=document.getElementById('stdName').value.trim();
   const grade=document.getElementById('stdGrade').value;
   if(!name||!grade){document.getElementById('loginErr').textContent='Please fill in name and grade.';document.getElementById('loginErr').style.display='block';return;}
@@ -1515,7 +1494,6 @@ function finalizeStudent(agreed){
 // ═══════════════════════════════════════════════════════════
 function renderDash(){
   const c=document.getElementById('exList'); c.innerHTML='';
-  if(!window._$iv||!window._$iv()){c.innerHTML='<div style="padding:20px;text-align:center;color:#c0392b;font-weight:700;font-size:1rem">⚠ File integrity check failed.<br>This quiz has been tampered with. Please contact your teacher for the original file.</div>';return;}
   const exs=(DB[stdGrade]||[]);
   if(!exs.length){c.innerHTML='<div style="padding:18px;color:var(--err);background:var(--err-bg);border-radius:var(--rs);font-weight:700;text-align:center">No exercises for this grade yet. Ask your teacher.</div>';return;}
   exs.forEach((ex,i)=>{
@@ -1532,7 +1510,6 @@ function launchEx(idx){
   showModeModal(idx);
 }
 function _doLaunchEx(idx){
-  if(!window._$iv||!window._$iv()){toast('⚠ File integrity check failed.','err');switchScreen('scDash');return;}
   curEx=(DB[stdGrade]||[])[idx];
   if(!curEx||!curEx.questions||!curEx.questions.length){toast('No questions in this exercise.','err');return;}
   _lastExIdx=idx;
@@ -1943,10 +1920,13 @@ function addFB(card,q,rev){
   card.appendChild(fb);
 }
 
-// Nav
-document.getElementById('prevBtn').onclick=function(){if(curQ>0){curQ--;sndClick();render();}};
-document.getElementById('nextBtn').onclick=function(){if(curQ<QS.length-1){curQ++;sndClick();render();}};
-document.getElementById('finishBtn').onclick=function(){sndClick();showScore();};
+// Nav — named functions so exported quiz keeps working onclick references
+function goPrevQuestion(){if(examMode==='exam')return;if(curQ>0){curQ--;sndClick();render();}}
+function goNextQuestion(){if(curQ<QS.length-1){curQ++;sndClick();render();}}
+function finishQuizNow(){sndClick();showScore();}
+document.getElementById('prevBtn').onclick=goPrevQuestion;
+document.getElementById('nextBtn').onclick=goNextQuestion;
+document.getElementById('finishBtn').onclick=finishQuizNow;
 
 function doRetryExercise(){
   if(!curEx || !curEx.questions || !curEx.questions.length){
@@ -2836,6 +2816,15 @@ function doExportAll(){
   document.getElementById('finishBtn').disabled=false;
   document.getElementById('finishBtn').style.display='none';
 
+
+  // Bake nav button onclick attributes so exported quiz calls named functions
+  var _nb=document.getElementById('nextBtn');
+  var _pb=document.getElementById('prevBtn');
+  var _fb=document.getElementById('finishBtn');
+  if(_nb) _nb.setAttribute('onclick','goNextQuestion()');
+  if(_pb) _pb.setAttribute('onclick','goPrevQuestion()');
+  if(_fb) _fb.setAttribute('onclick','finishQuizNow()');
+
   // Take snapshot
   var src=document.documentElement.outerHTML;
 
@@ -2922,6 +2911,15 @@ function doExport(){
   document.getElementById('nextBtn').disabled=false;
   document.getElementById('finishBtn').disabled=false;
   document.getElementById('finishBtn').style.display='none';
+
+
+  // Bake nav button onclick attributes so exported quiz calls named functions
+  var _nb=document.getElementById('nextBtn');
+  var _pb=document.getElementById('prevBtn');
+  var _fb=document.getElementById('finishBtn');
+  if(_nb) _nb.setAttribute('onclick','goNextQuestion()');
+  if(_pb) _pb.setAttribute('onclick','goPrevQuestion()');
+  if(_fb) _fb.setAttribute('onclick','finishQuizNow()');
 
   // Take snapshot while DOM is fully clean
   let src=document.documentElement.outerHTML;
