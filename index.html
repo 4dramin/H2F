@@ -777,6 +777,58 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 .ai-ord-n{font-weight:800;color:var(--gold3);min-width:22px;font-size:.76rem;}
 .ai-raw{background:rgba(0,0,0,.35);padding:10px 12px;border-radius:8px;font-size:.7rem;overflow:auto;max-height:180px;color:rgba(255,255,255,.6);white-space:pre-wrap;word-break:break-all;margin-top:8px;font-family:monospace;}
 #aiModelSel{margin-top:10px;width:100%;padding:9px 12px;border-radius:9px;border:1.5px solid rgba(255,255,255,.18);background:rgba(0,0,0,.28);color:#fff;font-size:.82rem;font-family:inherit;}
+
+/* ── AI Generator Panel — light .tc background overrides ── */
+.tc .ai-intro{color:rgba(50,30,0,.72)!important;}
+.tc .ai-sec{background:rgba(212,175,55,.07)!important;border-color:rgba(212,175,55,.22)!important;}
+.tc .ai-sec h3{color:var(--gold2)!important;}
+.tc .ai-prov-name{color:#1c1005!important;}
+.tc .ai-prov-card{background:rgba(255,255,255,.8)!important;border-color:rgba(212,175,55,.28)!important;color:#1c1005!important;}
+.tc .ai-prov-card:hover{background:rgba(212,175,55,.14)!important;}
+.tc .ai-prov-card.active{border-color:var(--gold2)!important;background:rgba(212,175,55,.18)!important;box-shadow:0 0 0 3px rgba(212,175,55,.25)!important;}
+.tc .ai-prov-nokey{color:rgba(0,0,0,.4)!important;}
+.tc .ai-prov-keyed{color:#14532d!important;}
+.tc .ai-key-status.warn{background:rgba(251,191,36,.12)!important;color:#92400e!important;border-color:rgba(251,191,36,.32)!important;}
+.tc .ai-key-status.ok{background:rgba(74,222,128,.1)!important;color:#14532d!important;border-color:rgba(74,222,128,.3)!important;}
+.tc #aiModelSel{background:#fffbf2!important;color:#1c1005!important;border-color:rgba(212,175,55,.35)!important;}
+.tc .ai-get-key-link{color:var(--gold2)!important;background:rgba(212,175,55,.08)!important;border-color:rgba(212,175,55,.25)!important;}
+.tc .ai-get-key-link:hover{background:rgba(212,175,55,.2)!important;}
+.tc .ai-res-card{background:rgba(255,255,255,.94)!important;border-color:rgba(212,175,55,.28)!important;}
+.tc .ai-res-card:hover{border-color:rgba(212,175,55,.5)!important;}
+.tc .ai-card-head{background:rgba(212,175,55,.08)!important;border-bottom-color:rgba(212,175,55,.2)!important;color:#3a2700!important;}
+.tc .ai-q-text{color:#1c1005!important;}
+.tc .ai-opt{background:rgba(0,0,0,.03)!important;color:#3a2700!important;}
+.tc .ai-opt-correct{background:rgba(74,222,128,.14)!important;color:#14532d!important;border-color:rgba(74,222,128,.32)!important;}
+.tc .ai-opt-lbl{color:var(--gold2)!important;}
+.tc .ai-pair{background:rgba(0,0,0,.03)!important;}
+.tc .ai-pair-l{color:#1c1005!important;}
+.tc .ai-pair-r{color:#3730a3!important;}
+.tc .ai-arr{color:var(--gold2)!important;}
+.tc .ai-ans-preview{background:rgba(74,222,128,.1)!important;color:#14532d!important;border-color:rgba(74,222,128,.25)!important;}
+.tc .ai-gap-row,.tc .ai-wb-row{color:#3a2700!important;border-bottom-color:rgba(0,0,0,.06)!important;}
+.tc .ai-ord-item{background:rgba(0,0,0,.03)!important;color:#1c1005!important;}
+.tc .ai-ord-n{color:var(--gold2)!important;}
+.tc .ai-raw{background:rgba(0,0,0,.06)!important;color:#3a2700!important;}
+.tc .ai-loading{color:#3a2700!important;}
+.tc .ai-spinner{border-color:rgba(0,0,0,.1)!important;border-top-color:var(--gold2)!important;}
+.tc .ai-err-box{background:rgba(239,68,68,.07)!important;color:#7f1d1d!important;border-color:rgba(239,68,68,.25)!important;}
+.tc .ai-info-box{background:rgba(99,102,241,.07)!important;color:#312e81!important;border-color:rgba(99,102,241,.22)!important;}
+.tc .ai-results-hdr{background:rgba(74,222,128,.07)!important;color:#14532d!important;border-color:rgba(74,222,128,.22)!important;}
+.tc .ai-edit-input{background:#fff!important;color:#1c1005!important;border-color:rgba(212,175,55,.3)!important;}
+.tc .ai-edit-input:focus{border-color:rgba(212,175,55,.6)!important;}
+.tc .ai-edit-opt-row input[type=text]{background:#fff!important;color:#1c1005!important;border-color:rgba(212,175,55,.25)!important;}
+.tc .ai-edit-pair-row input{background:#fff!important;color:#1c1005!important;border-color:rgba(212,175,55,.25)!important;}
+.tc .ai-edit-label{color:rgba(0,0,0,.5)!important;}
+.tc .ai-edit-pair-arr{color:var(--gold2)!important;}
+.tc .ai-save-edit{background:rgba(34,197,94,.15)!important;color:#14532d!important;border-color:rgba(34,197,94,.3)!important;}
+.tc .ai-cancel-edit{background:rgba(0,0,0,.05)!important;color:rgba(0,0,0,.6)!important;border-color:rgba(0,0,0,.15)!important;}
+/* MCQ Format Helper tool */
+.mcq-fmt-box{background:rgba(212,175,55,.07);border:1.5px solid rgba(212,175,55,.3);border-radius:16px;padding:20px;margin-top:22px;}
+.mcq-fmt-box h3{font-size:.88rem;font-weight:800;color:var(--gold2);margin-bottom:6px;}
+.mcq-fmt-box p{font-size:.78rem;color:rgba(50,30,0,.65);margin-bottom:10px;line-height:1.6;}
+.mcq-fmt-box textarea{width:100%;min-height:100px;padding:10px 12px;border-radius:10px;border:1.5px solid rgba(212,175,55,.3);font-size:.83rem;font-family:var(--font);color:#1c1005;background:#fffbf2;resize:vertical;box-sizing:border-box;}
+.mcq-fmt-out{background:#f0f4ff;border:1.5px solid rgba(99,102,241,.22);border-radius:10px;padding:12px;font-size:.81rem;font-family:monospace;white-space:pre-wrap;color:#1e1b4b;margin-top:10px;min-height:60px;line-height:1.8;display:none;}
+.mcq-fmt-msg{font-size:.76rem;font-weight:700;margin-top:7px;display:none;}
 </style>
 </head>
 <body>
@@ -1400,6 +1452,21 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
 
         <!-- Results -->
         <div id="aiResults"></div>
+
+        <!-- MCQ Format Helper -->
+        <div class="mcq-fmt-box">
+          <h3>🔧 MCQ Format Helper — Prepare Text for Panel B</h3>
+          <p>Got raw MCQ text in an unsupported format? Paste it here and click <strong>Format</strong> — it will be converted into the exact format accepted by Panel B's 🤖 AI Smart Paste box, with the correct answer marked by <code style="background:rgba(212,175,55,.15);padding:1px 5px;border-radius:4px">*</code>.</p>
+          <p style="font-size:.73rem;opacity:.7;margin-bottom:10px">Supports: numbered questions (1. / 1)), options on same line or separate lines, correct answer marked with *, (correct), (✓), or (Answer: A).</p>
+          <textarea id="mcqFmtIn" placeholder="Paste raw MCQ text here, e.g.:&#10;&#10;1. What is the capital of France?&#10;A) London  B) Paris*  C) Berlin  D) Rome&#10;&#10;2. Which planet is largest?&#10;A. Jupiter (correct)&#10;B. Saturn&#10;C. Earth&#10;D. Mars"></textarea>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
+            <button class="ai-btn" onclick="mcqFormat()">🔧 Format for Panel B</button>
+            <button class="ai-btn" style="background:linear-gradient(135deg,#16a34a,#14532d)" onclick="mcqFmtCopy()">📋 Copy Result</button>
+            <button class="ai-btn" style="background:linear-gradient(135deg,#b8860b,#8B4000)" onclick="mcqFmtGoB()">➡️ Send to Panel B</button>
+          </div>
+          <div class="mcq-fmt-msg" id="mcqFmtMsg"></div>
+          <div class="mcq-fmt-out" id="mcqFmtOut"></div>
+        </div>
       </div>
     </div>
     </div><!-- /t-panels-wrap -->
@@ -5699,6 +5766,114 @@ window.aiRegenerateSingle=aiRegenerateSingle;
 window.aiEditSingle=aiEditSingle;
 window.aiApplyEdit=aiApplyEdit;
 window.aiCancelEdit=aiCancelEdit;
+
+// ── MCQ Format Helper ──────────────────────────────────────────────────────
+function mcqFormat(){
+  var raw=((document.getElementById('mcqFmtIn')||{}).value||'').trim();
+  if(!raw){toast('Paste some MCQ text first.','warn');sndWarn&&sndWarn();return;}
+  var lines=raw.split(/\r?\n/);
+  var questions=[];
+  var curQ=null;
+
+  function pushQ(){if(curQ&&curQ.q){questions.push(curQ);}curQ=null;}
+
+  for(var i=0;i<lines.length;i++){
+    var line=lines[i].trim();
+    if(!line){pushQ();continue;}
+    // Answer key line: "Answer: B" or "Correct answer: C"
+    var akm=line.match(/^(?:answer|correct\s*answer)\s*:?\s*([ABCD])\b/i);
+    if(akm&&curQ){var ai='ABCD'.indexOf(akm[1].toUpperCase());if(ai>=0)curQ.ans=ai;continue;}
+    // New question: starts with number then . or )
+    var qm=line.match(/^(\d+)[\.\)]\s+(.+)/);
+    if(qm){
+      pushQ();
+      var qtext=qm[2].trim();
+      curQ={num:parseInt(qm[1]),q:qtext,opts:[null,null,null,null],ans:-1};
+      // Inline options on same line as question: "1. Q? A) x  B) y*  C) z  D) w"
+      var inlineMatch=qtext.match(/^(.*?)\s{2,}([ABCD][\.\)].+)$/);
+      if(!inlineMatch)inlineMatch=qtext.match(/^(.*?)\s+([ABCD]\)\s*\S.+)$/) ;
+      if(inlineMatch){
+        curQ.q=inlineMatch[1].trim();
+        var rest=inlineMatch[2];
+        var optRe=/([ABCD])[\.\)]\s*(.*?)(?=\s{2,}[ABCD][\.\)]|$)/g;
+        var om2;
+        while((om2=optRe.exec(rest))!==null){
+          var oi='ABCD'.indexOf(om2[1]);
+          var otxt=om2[2].trim();
+          var iscor=otxt.endsWith('*')||/\(correct\)/i.test(otxt)||/\(✓\)/.test(otxt);
+          if(iscor){curQ.ans=oi;otxt=otxt.replace(/\*$/,'').replace(/\s*\(correct\)\s*$/i,'').replace(/\s*\(✓\)\s*/,'').trim();}
+          if(oi>=0)curQ.opts[oi]=otxt;
+        }
+      }
+      continue;
+    }
+    // Option line: A) / A. / (A) / A -
+    var om=line.match(/^[\(\[]?([ABCD])[\.\)\]\-]\s*(.+)/i);
+    if(om&&curQ){
+      var idx='ABCD'.indexOf(om[1].toUpperCase());
+      if(idx>=0&&idx<4){
+        var txt=om[2].trim();
+        var correct=txt.endsWith('*')||/\(correct\)/i.test(txt)||/\(✓\)/.test(txt);
+        if(correct){curQ.ans=idx;txt=txt.replace(/\*$/,'').replace(/\s*\(correct\)\s*$/i,'').replace(/\s*\(✓\)\s*/,'').trim();}
+        curQ.opts[idx]=txt;
+      }
+      continue;
+    }
+    // Continuation of question text
+    if(curQ){curQ.q+=' '+line;}
+  }
+  pushQ();
+
+  if(!questions.length){
+    var msg=document.getElementById('mcqFmtMsg');
+    if(msg){msg.textContent='⚠️ Could not detect any questions. Check that questions start with a number (1. or 1)) and options use A) B) C) D).';msg.style.color='#dc2626';msg.style.display='block';}
+    return;
+  }
+
+  var out=questions.map(function(q,i){
+    var filled=q.opts.filter(function(o){return o;});
+    var optStr=q.opts.map(function(o,j){
+      if(o===null||o===undefined||o==='')return '';
+      var lbl='ABCD'[j];
+      var isAns=(q.ans===j);
+      return lbl+') '+o+(isAns?'*':'');
+    }).filter(function(s){return s;}).join('  ');
+    return (q.num||i+1)+'. '+q.q+'\n'+optStr;
+  }).join('\n\n');
+
+  var outDiv=document.getElementById('mcqFmtOut');
+  if(outDiv){outDiv.textContent=out;outDiv.style.display='block';}
+  var msg=document.getElementById('mcqFmtMsg');
+  var noAns=questions.filter(function(q){return q.ans<0;}).length;
+  var warn=noAns?' (⚠️ '+noAns+' question'+(noAns>1?'s':'')+' — correct answer not detected, mark manually with *)':'';
+  if(msg){msg.textContent='✅ '+questions.length+' question'+(questions.length!==1?'s':'')+' formatted.'+warn;msg.style.color=noAns?'#92400e':'#14532d';msg.style.display='block';}
+  sndSave&&sndSave();
+}
+
+function mcqFmtCopy(){
+  var out=document.getElementById('mcqFmtOut');
+  if(!out||!out.textContent.trim()){toast('Format some MCQ text first.','warn');return;}
+  navigator.clipboard.writeText(out.textContent.trim()).then(function(){
+    toast('Copied to clipboard!','ok');
+  }).catch(function(){
+    var ta=document.createElement('textarea');ta.value=out.textContent;
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    toast('Copied!','ok');
+  });
+}
+
+function mcqFmtGoB(){
+  var out=document.getElementById('mcqFmtOut');
+  if(!out||!out.textContent.trim()){toast('Format some MCQ text first.','warn');return;}
+  var bAI=document.getElementById('bAI');
+  if(bAI){bAI.value=out.textContent.trim();}
+  switchTab(1);
+  toast('Text sent to Panel B — click 🤖 Parse & Auto-Fill!','ok');
+}
+
+window.mcqFormat=mcqFormat;
+window.mcqFmtCopy=mcqFmtCopy;
+window.mcqFmtGoB=mcqFmtGoB;
 
 })();
 </script>
