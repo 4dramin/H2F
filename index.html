@@ -51,6 +51,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 @media print{body{display:none!important;visibility:hidden!important;}}
+/* ── Quiz Options Box (Dr. Amin Mefreh Enhancement) ── */
+.quiz-opts-box{margin-top:14px;border-radius:12px;border:2px solid rgba(212,175,55,.35);background:linear-gradient(135deg,rgba(255,251,240,.98),rgba(255,247,230,.95));overflow:hidden}
+.qo-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;cursor:pointer;font-size:.82rem;font-weight:800;color:#7c4a00;letter-spacing:.3px;user-select:none;-webkit-user-select:none;border-bottom:1.5px solid rgba(212,175,55,.22);transition:background .18s}
+.qo-header:hover{background:rgba(212,175,55,.12)}
+.qo-arrow{font-size:.7rem;color:var(--gold2);transition:transform .2s}
+.qo-body{padding:14px 16px}
+.qo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.qo-group{display:flex;flex-direction:column;gap:4px}
+.qo-label{font-size:.72rem;font-weight:800;color:#7c4a00;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
+.qo-radio{display:flex;align-items:center;gap:6px;font-size:.79rem;color:#3D3D5C;cursor:pointer;font-weight:600;padding:2px 0}
+.qo-radio input[type=radio]{accent-color:var(--gold2);width:13px;height:13px;flex-shrink:0;cursor:pointer}
+.s-qo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:14px}
+
 :root{
   --ind1:#667eea;--ind2:#764ba2;--ind-dark:#5a3d8a;--ind-light:#f0f4ff;
   --gold:#D4AF37;--gold2:#B8860B;--gold3:#E8C84A;--gold-bg:rgba(212,175,55,.12);
@@ -1053,6 +1066,59 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
           <div class="tf"><label>Time (sec)</label><input type="number" id="aTm" oninput="this._userEdited=true" min="5" max="300" step="5" value="30"></div>
         </div>
         <div class="tf"><label>Explanation (optional)</label><textarea id="aExp" rows="2" placeholder="Shown after answer"></textarea></div>
+        <div class="quiz-opts-box" id="aOptsBox">
+          <div class="qo-header" onclick="toggleQO('a')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="aOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="aOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="aMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="aMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="aMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="aAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="aAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="aAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="aAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="aTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="aTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="aTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="aTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="aTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="aSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="aSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="aSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="aAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="aAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="aAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="aConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="aConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="aShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="aShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="tb-row">
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="tb primary" onclick="addImageQ()">➕ Add Question</button>
@@ -1097,6 +1163,59 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
           <div class="tf"><label>Time (sec)</label><input type="number" id="bTm" oninput="this._userEdited=true" min="5" max="300" step="5" value="30"></div>
         </div>
         <div class="tf"><label>Explanation (optional)</label><textarea id="bExp" rows="2" placeholder="Shown after answer"></textarea></div>
+        <div class="quiz-opts-box" id="bOptsBox">
+          <div class="qo-header" onclick="toggleQO('b')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="bOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="bOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="bMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="bMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="bMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="bAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="bAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="bAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="bAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="bTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="bTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="bTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="bTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="bTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="bSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="bSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="bSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="bAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="bAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="bAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="bConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="bConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="bShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="bShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="tb-row">
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="tb primary" onclick="addTextQ()">➕ Add Question</button>
@@ -1134,6 +1253,60 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
           <div class="tf"><label>Time per gap (sec)</label><input type="number" id="cTm" oninput="this._userEdited=true" min="5" max="120" step="5" value="20"></div>
           <div class="tf"><label>Marks per gap</label><input type="number" id="cMk" min="1" oninput="this._userEdited=true" value="2"></div>
         </div>
+        
+        <div class="quiz-opts-box" id="cOptsBox">
+          <div class="qo-header" onclick="toggleQO('c')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="cOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="cOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="cMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="cMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="cMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="cAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="cAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="cAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="cAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="cTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="cTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="cTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="cTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="cTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="cSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="cSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="cSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="cAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="cAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="cAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="cConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="cConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="cShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="cShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="tb-row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="tb success" onclick="saveEx('C')">💾 Save Cloze Exercise</button><button class="tb" onclick="saveAndExportHtml('C')">🌐 Export HTML</button><button class="tb info" onclick="saveAndExportScorm('C')">📦 Export SCORM 2004</button></div>
       </div>
     </div>
@@ -1163,6 +1336,60 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
         <div class="t2">
           <div class="tf"><label>Marks per statement</label><input type="number" id="dMk" min="1" oninput="this._userEdited=true" value="2"></div>
           <div class="tf"><label>Time per statement (sec)</label><input type="number" id="dTm" oninput="this._userEdited=true" min="5" max="120" step="5" value="20"></div>
+        </div>
+        
+        <div class="quiz-opts-box" id="dOptsBox">
+          <div class="qo-header" onclick="toggleQO('d')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="dOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="dOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="dMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="dMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="dMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="dAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="dAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="dAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="dAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="dTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="dTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="dTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="dTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="dTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="dSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="dSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="dSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="dAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="dAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="dAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="dConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="dConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="dShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="dShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="tb-row">
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
@@ -1202,6 +1429,60 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
           <div class="tf"><label>Marks (total)</label><input type="number" id="eMk" min="1" oninput="this._userEdited=true" value="10"></div>
           <div class="tf"><label>Time (sec)</label><input type="number" id="eTm" oninput="this._userEdited=true" min="10" max="300" step="5" value="60"></div>
         </div>
+        
+        <div class="quiz-opts-box" id="eOptsBox">
+          <div class="qo-header" onclick="toggleQO('e')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="eOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="eOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="eMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="eMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="eMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="eAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="eAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="eAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="eAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="eTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="eTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="eTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="eTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="eTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="eSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="eSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="eSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="eAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="eAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="eAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="eConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="eConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="eShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="eShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="tb-row">
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
             <button class="tb success" onclick="saveEx('E')">💾 Save Exercise</button>
@@ -1230,6 +1511,60 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
         <div class="t2">
           <div class="tf"><label>Marks</label><input type="number" id="fMk" min="1" oninput="this._userEdited=true" value="5"></div>
           <div class="tf"><label>Time (sec)</label><input type="number" id="fTm" oninput="this._userEdited=true" min="10" max="300" step="10" value="60"></div>
+        </div>
+        
+        <div class="quiz-opts-box" id="fOptsBox">
+          <div class="qo-header" onclick="toggleQO('f')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="fOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="fOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="fMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="fMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="fMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="fAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="fAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="fAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="fAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="fTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="fTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="fTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="fTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="fTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="fSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="fSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="fSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="fAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="fAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="fAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="fConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="fConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="fShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="fShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="tb-row">
           <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1274,6 +1609,60 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
           <div class="tf"><label>Marks per blank</label><input type="number" id="gMk" min="1" oninput="this._userEdited=true" value="2"></div>
           <div class="tf"><label>Time (sec)</label><input type="number" id="gTm" oninput="this._userEdited=true" min="10" max="300" step="10" value="60"></div>
         </div>
+        
+        <div class="quiz-opts-box" id="gOptsBox">
+          <div class="qo-header" onclick="toggleQO('g')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="gOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="gOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="gMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="gMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="gMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="gAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="gAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="gAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="gAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="gTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="gTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="gTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="gTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="gTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="gSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="gSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="gSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="gAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="gAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="gAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="gConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="gConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="gShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="gShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="tb-row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="tb success" onclick="saveEx('G')">💾 Save Exercise</button><button class="tb" onclick="saveAndExportHtml('G')">🌐 Export HTML</button><button class="tb info" onclick="saveAndExportScorm('G')">📦 Export SCORM 2004</button></div>
       </div>
     </div>
@@ -1296,6 +1685,60 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
         <div class="t2">
           <div class="tf"><label>Marks (total)</label><input type="number" id="hMk" min="1" oninput="this._userEdited=true" value="10"></div>
           <div class="tf"><label>Time (sec)</label><input type="number" id="hTm" oninput="this._userEdited=true" min="10" max="300" step="10" value="90"></div>
+        </div>
+        
+        <div class="quiz-opts-box" id="hOptsBox">
+          <div class="qo-header" onclick="toggleQO('h')">&#9881;&#65039; Quiz Behavior Options <span class="qo-arrow" id="hOptsArrow">&#9660;</span></div>
+          <div class="qo-body" id="hOptsBody" style="display:none">
+            <div class="qo-grid">
+              <div class="qo-group">
+                <div class="qo-label">&#127919; Quiz Mode</div>
+                <label class="qo-radio"><input type="radio" name="hMode" value="both" checked> Both (student chooses)</label>
+                <label class="qo-radio"><input type="radio" name="hMode" value="test"> Test Mode Only</label>
+                <label class="qo-radio"><input type="radio" name="hMode" value="practice"> Practice Mode Only</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128257; Attempt Policy</div>
+                <label class="qo-radio"><input type="radio" name="hAttempt" value="try-again" checked> Try Again (retry allowed)</label>
+                <label class="qo-radio"><input type="radio" name="hAttempt" value="take-once"> Take Once (no retry)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+                <label class="qo-radio"><input type="radio" name="hAnti" value="hardened" checked> Anti-Cheating (fullscreen + alerts)</label>
+                <label class="qo-radio"><input type="radio" name="hAnti" value="ordinary"> Ordinary (no restrictions)</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127912; Theme</div>
+                <label class="qo-radio"><input type="radio" name="hTheme" value="classic" checked> &#127963; Classic Purple</label>
+                <label class="qo-radio"><input type="radio" name="hTheme" value="dark"> &#127762; Dark Mode</label>
+                <label class="qo-radio"><input type="radio" name="hTheme" value="ocean"> &#127754; Ocean Blue</label>
+                <label class="qo-radio"><input type="radio" name="hTheme" value="forest"> &#127807; Forest Green</label>
+                <label class="qo-radio"><input type="radio" name="hTheme" value="sunset"> &#127749; Warm Sunset</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128266; Sound Effects</div>
+                <label class="qo-radio"><input type="radio" name="hSound" value="full" checked> Full Sounds</label>
+                <label class="qo-radio"><input type="radio" name="hSound" value="minimal"> Minimal</label>
+                <label class="qo-radio"><input type="radio" name="hSound" value="none"> Silent</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#10024; Animations</div>
+                <label class="qo-radio"><input type="radio" name="hAnim" value="on" checked> Full Animations</label>
+                <label class="qo-radio"><input type="radio" name="hAnim" value="reduced"> Reduced</label>
+                <label class="qo-radio"><input type="radio" name="hAnim" value="off"> Minimal</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#127881; Confetti on Pass</div>
+                <label class="qo-radio"><input type="radio" name="hConfetti" value="yes" checked> Yes &#127882;</label>
+                <label class="qo-radio"><input type="radio" name="hConfetti" value="no"> No</label>
+              </div>
+              <div class="qo-group">
+                <div class="qo-label">&#128256; Shuffle Questions</div>
+                <label class="qo-radio"><input type="radio" name="hShuffle" value="no" checked> Keep Order</label>
+                <label class="qo-radio"><input type="radio" name="hShuffle" value="yes"> Randomize</label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="tb-row">
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
@@ -1350,6 +1793,60 @@ select.fi{appearance:none;-webkit-appearance:none;background-image:url("data:ima
         <div style="margin-top:12px">
           <button class="tb primary" onclick="saveDefaults()">💾 Save Defaults</button>
           <button class="tb" onclick="resetDefaults()" style="margin-left:8px">↩ Reset to Original</button>
+        </div>
+      </div>
+
+
+      <div class="s-sec" id="sQoBehavior">
+        <h3>&#9881;&#65039; Global Quiz Behavior Defaults</h3>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:12px;line-height:1.5">These defaults apply when exporting via the Manager tab (Export All Grades). Per-panel settings in panels A&#8211;H override these for individual exports.</p>
+        <div class="s-qo-grid">
+          <div class="qo-group">
+            <div class="qo-label">&#127919; Quiz Mode</div>
+            <label class="qo-radio"><input type="radio" name="gMode" value="both" checked> Both (student chooses)</label>
+            <label class="qo-radio"><input type="radio" name="gMode" value="test"> Test Mode Only</label>
+            <label class="qo-radio"><input type="radio" name="gMode" value="practice"> Practice Mode Only</label>
+          </div>
+          <div class="qo-group">
+            <div class="qo-label">&#128257; Attempt Policy</div>
+            <label class="qo-radio"><input type="radio" name="gAttempt" value="try-again" checked> Try Again</label>
+            <label class="qo-radio"><input type="radio" name="gAttempt" value="take-once"> Take Once</label>
+          </div>
+          <div class="qo-group">
+            <div class="qo-label">&#128737; Anti-Cheat Mode</div>
+            <label class="qo-radio"><input type="radio" name="gAnti" value="hardened" checked> Anti-Cheating</label>
+            <label class="qo-radio"><input type="radio" name="gAnti" value="ordinary"> Ordinary Mode</label>
+          </div>
+          <div class="qo-group">
+            <div class="qo-label">&#127912; Theme</div>
+            <label class="qo-radio"><input type="radio" name="gTheme" value="classic" checked> &#127963; Classic Purple</label>
+            <label class="qo-radio"><input type="radio" name="gTheme" value="dark"> &#127762; Dark Mode</label>
+            <label class="qo-radio"><input type="radio" name="gTheme" value="ocean"> &#127754; Ocean Blue</label>
+            <label class="qo-radio"><input type="radio" name="gTheme" value="forest"> &#127807; Forest Green</label>
+            <label class="qo-radio"><input type="radio" name="gTheme" value="sunset"> &#127749; Warm Sunset</label>
+          </div>
+          <div class="qo-group">
+            <div class="qo-label">&#128266; Sound Effects</div>
+            <label class="qo-radio"><input type="radio" name="gSound" value="full" checked> Full Sounds</label>
+            <label class="qo-radio"><input type="radio" name="gSound" value="minimal"> Minimal</label>
+            <label class="qo-radio"><input type="radio" name="gSound" value="none"> Silent</label>
+          </div>
+          <div class="qo-group">
+            <div class="qo-label">&#10024; Animations</div>
+            <label class="qo-radio"><input type="radio" name="gAnim" value="on" checked> Full</label>
+            <label class="qo-radio"><input type="radio" name="gAnim" value="reduced"> Reduced</label>
+            <label class="qo-radio"><input type="radio" name="gAnim" value="off"> Minimal</label>
+          </div>
+          <div class="qo-group">
+            <div class="qo-label">&#127881; Confetti on Pass</div>
+            <label class="qo-radio"><input type="radio" name="gConfetti" value="yes" checked> Yes &#127882;</label>
+            <label class="qo-radio"><input type="radio" name="gConfetti" value="no"> No</label>
+          </div>
+          <div class="qo-group">
+            <div class="qo-label">&#128256; Shuffle Questions</div>
+            <label class="qo-radio"><input type="radio" name="gShuffle" value="no" checked> Keep Order</label>
+            <label class="qo-radio"><input type="radio" name="gShuffle" value="yes"> Randomize</label>
+          </div>
         </div>
       </div>
 
@@ -1529,6 +2026,48 @@ const TB_CLS = {
   'word-bank':'b-wbank','ordering':'b-order'
 };
 const LABS = ['A','B','C','D','E','F','G','H'];
+
+// ═══════════════════════════════════════════════════════════
+// QUIZ OPTIONS HELPERS (Dr. Amin Mefreh Enhancement)
+// ═══════════════════════════════════════════════════════════
+function toggleQO(p){
+  var body=document.getElementById(p+'OptsBody');
+  var arrow=document.getElementById(p+'OptsArrow');
+  if(!body)return;
+  var open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  if(arrow)arrow.style.transform=open?'':'rotate(180deg)';
+}
+function _rbVal(name){
+  var el=document.querySelector('input[name="'+name+'"]:checked');
+  return el?el.value:null;
+}
+function getQuizOptions(panel){
+  var p=String(panel).toLowerCase();
+  return {
+    quizMode:(_rbVal(p+'Mode')||'both'),
+    attemptPolicy:(_rbVal(p+'Attempt')||'try-again'),
+    antiCheat:(_rbVal(p+'Anti')||'hardened'),
+    theme:(_rbVal(p+'Theme')||'classic'),
+    sound:(_rbVal(p+'Sound')||'full'),
+    animations:(_rbVal(p+'Anim')||'on'),
+    confetti:(_rbVal(p+'Confetti')||'yes')==='yes',
+    shuffleQuestions:(_rbVal(p+'Shuffle')||'no')==='yes'
+  };
+}
+function getGlobalQuizOptions(){
+  return {
+    quizMode:(_rbVal('gMode')||'both'),
+    attemptPolicy:(_rbVal('gAttempt')||'try-again'),
+    antiCheat:(_rbVal('gAnti')||'hardened'),
+    theme:(_rbVal('gTheme')||'classic'),
+    sound:(_rbVal('gSound')||'full'),
+    animations:(_rbVal('gAnim')||'on'),
+    confetti:(_rbVal('gConfetti')||'yes')==='yes',
+    shuffleQuestions:(_rbVal('gShuffle')||'no')==='yes'
+  };
+}
+
 
 // ═══════════════════════════════════════════════════════════
 // TOAST
@@ -2792,7 +3331,8 @@ function saveEx(panel){
   if(!questions.length){toast('No questions to save.','err');return null;}
   if(!DB[g]) DB[g]=[];
   const _newId=uid();
-  DB[g].push({id:_newId,title,type:questions[0].type,questions});
+  var _qOpts=getQuizOptions(panel);
+  DB[g].push({id:_newId,title,type:questions[0].type,questions,options:_qOpts});
   toast('"'+title+'" saved with '+questions.length+' question(s).','ok');
 
   // Reset
@@ -2833,7 +3373,8 @@ function saveAndExportHtml(panel){
 }
 function _doExportHtml(ex){
   const totalMarks=_calcTotalMarks(ex.questions);
-  const html=_scormQuizHtml(ex,totalMarks,GS_URL||'');
+  const _exOpts=ex.options||getGlobalQuizOptions();
+  const html=_scormQuizHtml(ex,totalMarks,GS_URL||'',_exOpts);
   const title=(ex.title||'Quiz').replace(/[^a-z0-9_\- ]/gi,'_').replace(/\s+/g,'_').slice(0,40)||'Quiz';
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
   const a=document.createElement('a');
@@ -3441,7 +3982,8 @@ function _doExportScorm(ex){
   var passingRaw=Math.round(totalMarks*PASS_PCT/100);
 
   zip.file('imsmanifest.xml', _scormManifest(ex, safeTitle, totalMarks, passingRaw));
-  zip.file('index.html', _scormQuizHtml(ex, totalMarks, GS_URL||''));
+  var _sOpts=ex.options||getGlobalQuizOptions();
+  zip.file('index.html', _scormQuizHtml(ex, totalMarks, GS_URL||'',_sOpts));
   zip.file('adlcp_rootv1p2.xsd','');
   zip.file('ims_xml.xsd','');
 
@@ -3498,7 +4040,7 @@ function _scormManifest(ex, safeTitle, totalMarks, passingRaw){
 
 function _xmlEsc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');}
 
-function _scormQuizHtml(ex, totalMarks, gsUrl){
+function _scormQuizHtml(ex, totalMarks, gsUrl, _opts){
   var title=ex.title||'Quiz';
   var passPct=PASS_PCT;
   var qJson=JSON.stringify(ex.questions);
@@ -3574,7 +4116,7 @@ function _scormQuizHtml(ex, totalMarks, gsUrl){
   +'    </div>\n'
   +'    <div class="dtbl-wrap"><table class="dtbl"><thead><tr><th>Q</th><th>Type</th><th>Answer</th><th>Status</th><th>Marks</th></tr></thead><tbody id="dtblBody"></tbody></table></div>\n'
   +'    <div id="scorm-status" style="text-align:center;margin-top:16px;font-size:.85rem;color:#888;font-weight:700"></div>\n'
-  +'    <button onclick="doRetry()" style="display:block;margin:18px auto 0;padding:12px 36px;border-radius:999px;background:linear-gradient(135deg,#D4AF37,#ea580c);color:#fff;border:none;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit">🔄 Try Again</button>\n'
+  +'    <button id="retryQuizBtn" onclick="doRetry()" style="display:block;margin:18px auto 0;padding:12px 36px;border-radius:999px;background:linear-gradient(135deg,#D4AF37,#ea580c);color:#fff;border:none;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit">🔄 Try Again</button>\n'
   +'  </div>\n'
   +'  <div id="scorm-login" class="sc-login-bg">\n'
   +'    <div class="sc-login-box">\n'
@@ -3614,7 +4156,7 @@ function _scormQuizHtml(ex, totalMarks, gsUrl){
   +'  <button style="background:#FF4444;color:#fff;border:none;border-radius:14px;padding:13px 36px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit" onclick="(function(){document.getElementById(\'sc-cheat-ov\').style.display=\'none\';_reqFullscreen&&_reqFullscreen();})()">I Understand — Return to Exam</button>\n'
   +'</div>\n'
   +'<scr'+'ipt>\n'
-  +_scormJs(title, totalMarks, passPct, qJson, gsUrl||'')
+  +_scormJs(title, totalMarks, passPct, qJson, gsUrl||'', _opts||{})
   +'\n<\/script>\n<div id="sc-wm-banner">With My Best Wishes — Dr. Amin Mefreh</div>\n<script>\n/* ── Watermark Visibility Check ── */\n(function(){\n  function _wmCheck(){\n    var wm=document.getElementById(\'sc-wm-banner\');\n    var ok=wm&&wm.offsetParent!==null&&window.getComputedStyle(wm).display!==\'none\'&&(document.documentElement.innerHTML||\'\').indexOf(\'Amin Mefreh\')>-1;\n    if(!ok){\n      try{if(document.fullscreenElement)document.exitFullscreen();}catch(e){}\n      document.body.innerHTML=\'<div style="background:#080808;color:#fff;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;text-align:center;padding:40px"><div style="font-size:4rem">🔒</div><h2 style="color:#FF4444;font-size:1.9rem;font-weight:900;margin:16px 0">Quiz Locked</h2><p style="color:#ffcccc;max-width:480px;line-height:1.8">The required watermark has been removed or hidden.<br><strong>The attribution &ldquo;With My Best Wishes — Dr. Amin Mefreh&rdquo; must remain visible.</strong></p><p style="color:#555;font-size:.8rem;margin-top:20px">Dr. Amin Mefreh — All rights reserved.</p></div>\';\n    }\n  }\n  window.addEventListener(\'load\',function(){setTimeout(_wmCheck,1000);setInterval(_wmCheck,4000);});\n})();\n<\/script>\n</body>\n</html>';
 }
 
@@ -3755,8 +4297,58 @@ function _scormCss(){
   +'/* exported-extra *//* ── Exported Quiz 3D Buttons ── */.nav-btn{position:relative!important;top:0!important;transition:transform .1s ease,box-shadow .1s ease!important;box-shadow:0 4px 0 rgba(0,0,0,.25),0 6px 12px rgba(0,0,0,.18)!important;}.nav-btn:hover:not(:disabled){transform:translateY(-2px)!important;box-shadow:0 6px 0 rgba(0,0,0,.25),0 8px 18px rgba(0,0,0,.22)!important;}.nav-btn:active:not(:disabled){transform:translateY(3px)!important;top:3px!important;box-shadow:0 1px 0 rgba(0,0,0,.2)!important;}.nb-next{box-shadow:0 4px 0 #3730a3,0 6px 12px rgba(55,48,163,.3)!important;}.nb-next:active:not(:disabled){box-shadow:0 1px 0 #3730a3!important;}.nb-fin{box-shadow:0 4px 0 #0d5c21,0 6px 12px rgba(13,92,33,.3)!important;}.nb-fin:active:not(:disabled){box-shadow:0 1px 0 #0d5c21!important;}.sc-btn-primary{position:relative!important;top:0!important;transition:transform .1s ease,box-shadow .1s ease!important;box-shadow:0 5px 0 #3730a3,0 7px 14px rgba(55,48,163,.3)!important;}.sc-btn-primary:active{transform:translateY(4px)!important;top:4px!important;box-shadow:0 1px 0 #3730a3!important;}/* Mute button */#scMuteBtn{background:rgba(255,255,255,.15)!important;border:1.5px solid rgba(255,255,255,.35)!important;color:#fff!important;border-radius:8px!important;padding:5px 11px!important;font-size:.78rem!important;font-weight:700!important;cursor:pointer!important;transition:background .2s!important;box-shadow:0 3px 0 rgba(0,0,0,.22),0 4px 8px rgba(0,0,0,.15)!important;position:relative!important;top:0!important;}#scMuteBtn:hover{background:rgba(255,255,255,.28)!important;}#scMuteBtn:active{transform:translateY(2px)!important;box-shadow:0 1px 0 rgba(0,0,0,.18)!important;}/* Visible watermark banner always visible during quiz */#sc-wm-banner{position:fixed;bottom:0;left:0;right:0;z-index:9998;text-align:center;padding:4px 10px;background:linear-gradient(90deg,rgba(212,175,55,.18),rgba(184,134,11,.22),rgba(212,175,55,.18));border-top:1px solid rgba(212,175,55,.45);font-size:.68rem;font-weight:800;color:rgba(90,50,0,.75);letter-spacing:.5px;pointer-events:none;user-select:none;font-family:Georgia,Arial,sans-serif;}/* Ticking clock overlay on timer chip */@keyframes scTickPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}.timer-chip.ticking{animation:scTickPulse .5s ease!important;}';
 }
 
-function _scormJs(title, totalMarks, passPct, qJson, gsUrl){
+function _scormJs(title, totalMarks, passPct, qJson, gsUrl, opts){
+  var _o=opts||{};
+  var J=JSON.stringify;
+  var _qm=J(_o.quizMode||'both');
+  var _ap=J(_o.attemptPolicy||'try-again');
+  var _ac=J(_o.antiCheat||'none');
+  var _sl=J(_o.sound||'full');
+  var _sc=(_o.confetti!==false)?'true':'false';
+  var _sq=(_o.shuffleQuestions===true)?'true':'false';
+  var _sa=J(_o.animations||'on');
+  var _themeMap={
+    classic:{i1:'#667eea',i2:'#764ba2',idk:'#5a3d8a',ilt:'#f0f4ff',gld:'#D4AF37',gld2:'#B8860B',ok:'#1E8A45',okb:'#E6F7ED',err:'#C0392B',errb:'#FDF0EF',ink:'#1A1A2E',ink2:'#3D3D5C',bb:'linear-gradient(135deg,#667eea 0%,#764ba2 100%)',tb:'linear-gradient(135deg,#0d0d1a,#1a1200,#2d1f00)',eb:'linear-gradient(180deg,#f5f7ff,#edf0fb)'},
+    dark:{i1:'#818cf8',i2:'#a78bfa',idk:'#6366f1',ilt:'#1e1b4b',gld:'#fbbf24',gld2:'#f59e0b',ok:'#34d399',okb:'#022c22',err:'#f87171',errb:'#450a0a',ink:'#f0f0ff',ink2:'#c7d2fe',bb:'linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#24243e 100%)',tb:'linear-gradient(135deg,#0f0c29,#302b63)',eb:'linear-gradient(180deg,#0f172a,#1e1b4b)'},
+    ocean:{i1:'#0ea5e9',i2:'#0284c7',idk:'#0369a1',ilt:'#e0f2fe',gld:'#34d399',gld2:'#059669',ok:'#059669',okb:'#ecfdf5',err:'#dc2626',errb:'#fef2f2',ink:'#0c4a6e',ink2:'#075985',bb:'linear-gradient(135deg,#0369a1 0%,#0ea5e9 50%,#06b6d4 100%)',tb:'linear-gradient(135deg,#03395c,#0369a1)',eb:'linear-gradient(180deg,#e0f2fe,#bfdbfe)'},
+    forest:{i1:'#16a34a',i2:'#15803d',idk:'#166534',ilt:'#dcfce7',gld:'#fbbf24',gld2:'#d97706',ok:'#15803d',okb:'#dcfce7',err:'#dc2626',errb:'#fef2f2',ink:'#14532d',ink2:'#166534',bb:'linear-gradient(135deg,#14532d 0%,#16a34a 50%,#22c55e 100%)',tb:'linear-gradient(135deg,#14532d,#166534)',eb:'linear-gradient(180deg,#ecfdf5,#d1fae5)'},
+    sunset:{i1:'#f97316',i2:'#ea580c',idk:'#c2410c',ilt:'#fff7ed',gld:'#f59e0b',gld2:'#d97706',ok:'#15803d',okb:'#dcfce7',err:'#dc2626',errb:'#fef2f2',ink:'#431407',ink2:'#7c2d12',bb:'linear-gradient(135deg,#7c2d12 0%,#c2410c 50%,#f97316 100%)',tb:'linear-gradient(135deg,#451a03,#7c2d12)',eb:'linear-gradient(180deg,#fff7ed,#ffedd5)'}
+  };
+  var _tObj=_themeMap[_o.theme||'classic']||_themeMap.classic;
+  var _TJ=J(_tObj);
+  // This string is injected INSIDE the exported quiz IIFE after the sound system
+  var _OPTION_CONSTS=
+    '/* ── Baked-in Quiz Options (Dr. Amin Mefreh) ── */\n'
+    +'var QUIZ_MODE='+_qm+';\n'
+    +'var ATTEMPT_POLICY='+_ap+';\n'
+    +'var ANTI_CHEAT='+_ac+';\n'
+    +'var SOUND_LEVEL='+_sl+';\n'
+    +'var SHOW_CONFETTI='+_sc+';\n'
+    +'var SHUFFLE_Q='+_sq+';\n'
+    // Mute sounds immediately if requested (runs after sound-system vars are declared)
+    +'if(SOUND_LEVEL==="none")_scMuted=true;\n'
+    +'else if(SOUND_LEVEL==="minimal"){sndTick=sndClick=function(){};}\n'
+    // Apply theme CSS variables and background immediately
+    +'(function(){var _t='+_TJ+';\n'
+    +'var r=document.documentElement;\n'
+    +'r.style.setProperty("--ind1",_t.i1);r.style.setProperty("--ind2",_t.i2);\n'
+    +'r.style.setProperty("--ind-dark",_t.idk);r.style.setProperty("--ind-light",_t.ilt);\n'
+    +'r.style.setProperty("--gold",_t.gld);r.style.setProperty("--gold2",_t.gld2);\n'
+    +'r.style.setProperty("--ok",_t.ok);r.style.setProperty("--ok-bg",_t.okb);\n'
+    +'r.style.setProperty("--err",_t.err);r.style.setProperty("--err-bg",_t.errb);\n'
+    +'r.style.setProperty("--ink",_t.ink);r.style.setProperty("--ink2",_t.ink2);\n'
+    +'function _applyBg(){\n'
+    +'  if(document.body)document.body.style.background=_t.bb;\n'
+    +'  var _tb=document.querySelector(".topbar");if(_tb)_tb.style.background=_t.tb;\n'
+    +'  var _eb=document.getElementById("exam-body");if(_eb)_eb.style.background=_t.eb;\n'
+    +'  if('+_sa+'==="off"){var _s=document.createElement("style");_s.textContent="*{animation:none!important;transition:none!important;}";document.head.appendChild(_s);}\n'
+    +'  else if('+_sa+'==="reduced"){var _s2=document.createElement("style");_s2.textContent=".q-card{animation:none!important;}";document.head.appendChild(_s2);}\n'
+    +'}\n'
+    +'if(document.readyState!=="loading")_applyBg();\n'
+    +'else document.addEventListener("DOMContentLoaded",_applyBg);\n'
+    +'})();\n';
   return '(function(){\n/* ─sound─ */\n' + '\n/* ── Exported Quiz Sound System (Dr. Amin Mefreh) ── */\nvar _scAC=null,_scMuted=false;\nfunction _scGetAC(){if(!_scAC){try{_scAC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}return _scAC;}\nfunction _scUnlock(){if(_scAC&&_scAC.state===\'suspended\')_scAC.resume();}\nfunction _scTone(freq,type,dur,vol,delay){\n  var ac=_scGetAC();if(!ac||_scMuted)return;\n  try{\n    var o=ac.createOscillator(),g=ac.createGain();\n    o.connect(g);g.connect(ac.destination);\n    o.type=type||\'sine\';\n    var t=ac.currentTime+(delay||0);\n    o.frequency.setValueAtTime(freq,t);\n    g.gain.setValueAtTime(vol||0.10,t);\n    g.gain.exponentialRampToValueAtTime(0.0001,t+(dur||0.12));\n    o.start(t);o.stop(t+(dur||0.12)+0.02);\n  }catch(e){}\n}\nfunction sndClick(){_scTone(1100,\'sine\',0.055,0.07);}\nfunction sndCorrect(){_scTone(523,\'sine\',0.10,0.10);_scTone(659,\'sine\',0.12,0.10,0.09);_scTone(784,\'sine\',0.14,0.09,0.18);}\nfunction sndWrong(){_scTone(220,\'sawtooth\',0.20,0.12);_scTone(165,\'sawtooth\',0.18,0.10,0.14);}\nfunction sndTick(){_scTone(1800,\'sine\',0.025,0.06);}\nfunction sndWarn(){_scTone(440,\'triangle\',0.18,0.10);_scTone(330,\'triangle\',0.18,0.08,0.16);}\nfunction sndStart(){_scTone(440,\'sine\',0.08,0.09);_scTone(550,\'sine\',0.10,0.09,0.07);_scTone(660,\'sine\',0.14,0.09,0.14);}\nfunction sndFinish(){_scTone(784,\'sine\',0.12,0.10);_scTone(1046,\'sine\',0.14,0.10,0.10);_scTone(1318,\'sine\',0.18,0.09,0.20);}\nfunction toggleScMute(){\n  _scMuted=!_scMuted;\n  var btn=document.getElementById(\'scMuteBtn\');\n  if(btn)btn.textContent=_scMuted?\'🔇 Muted\':\'🔊 Sound\';\n}\ndocument.addEventListener(\'click\',function(e){_scUnlock();},true);\n\n'
+  +_OPTION_CONSTS
   +'// ── SCORM 2004 API ──────────────────────────────────────\n'
   +'var _API=null,_initialized=false,_startTime=Date.now();\n'
   +'function _findAPI(w,depth){\n'
@@ -3836,10 +4428,15 @@ function _scormJs(title, totalMarks, passPct, qJson, gsUrl){
   +'    document.getElementById("scLoginErr").style.display="block";\n'
   +'    return;\n'
   +'  }\n'
+  +'  if(ATTEMPT_POLICY==="take-once"){\n'
+  +'    try{var _k0="qz_done_"+(typeof TITLE!=="undefined"?TITLE:"quiz").replace(/[^a-z0-9]/gi,"_");if(localStorage.getItem(_k0)){document.getElementById("scLoginErr").textContent="You have already completed this quiz. Contact your teacher to reset.";document.getElementById("scLoginErr").style.display="block";return;}}catch(e0){}\n'
+  +'  }\n'
   +'  showModeScreen();\n'
   +'}\n'
   +'function showModeScreen(){\n'
   +'  document.getElementById("scorm-login").style.display="none";\n'
+  +'  if(QUIZ_MODE==="test"){pickMode("test");return;}\n'
+  +'  if(QUIZ_MODE==="practice"){pickMode("practice");return;}\n'
   +'  var _mw=document.getElementById("sc-mode-wrap");if(_mw)_mw.style.display="flex";\n'
   +'}\n'
   +'function goBackToLogin(){\n'
@@ -3856,12 +4453,13 @@ function _scormJs(title, totalMarks, passPct, qJson, gsUrl){
   +'  _initSCORM();\n'
   +'  _examStarted=true;\n'
   +'  _qzStart=Date.now();\n'
-  +'  _reqFullscreen();\n'
-  +'  sndStart&&sndStart();\n'
-  +'  if(window._scEnableHarden)window._scEnableHarden();\n'
+  +'  if(ANTI_CHEAT!=="ordinary")_reqFullscreen();\n'
+  +'  if(SOUND_LEVEL!=="none")sndStart&&sndStart();\n'
+  +'  if(ANTI_CHEAT!=="ordinary"&&window._scEnableHarden)window._scEnableHarden();\n'
   +'  var _nm=(document.getElementById("scStdName")||{}).value||"STUDENT";\n'
   +'  if(window._scInitWatermark)window._scInitWatermark(_nm);\n'
-  +'  QS=ORIG_QS.map(function(q){return rtShuffle(q);});\n'
+  +'  var _qs2=(SHUFFLE_Q?ORIG_QS.slice().sort(function(){return Math.random()-.5;}):ORIG_QS);\n'
+  +'  QS=_qs2.map(function(q){return rtShuffle(q);});\n'
   +'  ANS=QS.map(function(q){\n'
   +'    if(q.type==="cloze")return new Array(q.gaps.length).fill(null);\n'
   +'    if(q.type==="matching")return new Array(q.pairs.length).fill(-1);\n'
@@ -3875,6 +4473,7 @@ function _scormJs(title, totalMarks, passPct, qJson, gsUrl){
   +'  render();\n'
   +'}\n'
   +'function doRetry(){\n'
+  +'  if(ATTEMPT_POLICY==="take-once"){alert("This quiz allows only one attempt. Contact your instructor to reset.");return;}\n'
   +'  _examStarted=false;\n'
   +'  document.getElementById("score-wrap").style.display="none";\n'
   +'  document.getElementById("quiz-wrap").style.display="none";\n'
@@ -4368,6 +4967,8 @@ function _scormJs(title, totalMarks, passPct, qJson, gsUrl){
   +'    tbody.appendChild(tr);\n'
   +'  });\n'
   +'  window.scrollTo(0,0);\n'
+  +'  if(SHOW_CONFETTI&&passed){(function(){var _cv=document.createElement("canvas");_cv.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;z-index:99998;pointer-events:none";document.body.appendChild(_cv);var _cx=_cv.getContext("2d");_cv.width=window.innerWidth;_cv.height=window.innerHeight;var _ps=[],_cl=["#D4AF37","#667eea","#16a34a","#f97316","#ec4899","#06b6d4"];for(var _i=0;_i<120;_i++)_ps.push({x:Math.random()*_cv.width,y:-10,vx:(Math.random()-.5)*4,vy:Math.random()*4+2,col:_cl[Math.floor(Math.random()*_cl.length)],w:Math.random()*8+4,h:Math.random()*4+2,rot:Math.random()*360,rv:(Math.random()-.5)*6,al:1});var _fr=0;(function _anim(){_cx.clearRect(0,0,_cv.width,_cv.height);_fr++;_ps.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;if(_fr>80)p.al=Math.max(0,p.al-.015);_cx.save();_cx.globalAlpha=p.al;_cx.translate(p.x,p.y);_cx.rotate(p.rot*Math.PI/180);_cx.fillStyle=p.col;_cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);_cx.restore();});if(_fr<150)requestAnimationFrame(_anim);else _cv.remove();})();})();}\n'
+  +'  if(ATTEMPT_POLICY==="take-once"){var _k1="qz_done_"+(typeof TITLE!=="undefined"?TITLE:"quiz").replace(/[^a-z0-9]/gi,"_");try{localStorage.setItem(_k1,"1");}catch(e1){}var _rb=document.getElementById("retryQuizBtn");if(_rb)_rb.style.display="none";}\n'
   +'}\n'
   +'// ── FULLSCREEN ───────────────────────────────────────────\n'
   +'function _reqFullscreen(){\n'
@@ -5049,7 +5650,22 @@ document.addEventListener('DOMContentLoaded',function(){
 
 </script>
 </body>
-<script>eval(atob("Ci8qIOKUgOKUgCBRdWl6TWFrZXIgUmlnaHQtQ2xpY2sgUHJvdGVjdGlvbiAoRHIuIEFtaW4gTWVmcmVoKSDilIDilIAgKi8KKGZ1bmN0aW9uKCl7CiAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignY29udGV4dG1lbnUnLGZ1bmN0aW9uKGUpewogICAgLy8gQWxsb3cgcmlnaHQtY2xpY2sgb25seSBpbnNpZGUgdGV4dCBpbnB1dCBmaWVsZHMgYW5kIHRleHRhcmVhcwogICAgdmFyIHQ9ZS50YXJnZXQ7CiAgICBpZih0JiYodC50YWdOYW1lPT09J0lOUFVUJ3x8dC50YWdOYW1lPT09J1RFWFRBUkVBJykpcmV0dXJuOwogICAgZS5wcmV2ZW50RGVmYXVsdCgpO3JldHVybiBmYWxzZTsKICB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJyxmdW5jdGlvbihlKXsKICAgIGlmKGUua2V5PT09J0YxMid8fChlLmN0cmxLZXkmJmUuc2hpZnRLZXkmJihlLmtleT09PSdJJ3x8ZS5rZXk9PT0nSid8fGUua2V5PT09J0MnKSl8fChlLmN0cmxLZXkmJmUua2V5PT09J1UnKSl7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTtyZXR1cm4gZmFsc2U7CiAgICB9CiAgfSk7Cn0pKCk7Cg=="));</script>
+<script>
+/* ── QuizMaker Right-Click Protection (Dr. Amin Mefreh) ── */
+(function(){
+  document.addEventListener('contextmenu',function(e){
+    // Allow right-click only inside text input fields and textareas
+    var t=e.target;
+    if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;
+    e.preventDefault();return false;
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'||e.key==='C'))||(e.ctrlKey&&e.key==='U')){
+      e.preventDefault();return false;
+    }
+  });
+})();
+</script>
 <script>
 /* ════════════════════════════════════════════════════════
    AI EXERCISE GENERATOR  — Dr. Amin Mefreh
